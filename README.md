@@ -18,5 +18,3 @@ As a user I want to be able to generate movies by review ratings.
 As a user I want to be able to filter my movies between paid steamed services VS free streaming services.
 
 As a user I want to be able to filter my movies based off ratings (PG, PG-13, Rated-R)
-
-this is a new line
