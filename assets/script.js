@@ -1,4 +1,4 @@
-var dummyRecipeUrl = "https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=646a3c17f65f48eb8dc89229bd07fab4&addRecipeInformation=true&fillIngredients=true";
+var dummyRecipeUrl = "https://api.spoonacular.com/recipes/random?number=1&fab4&addRecipeInformation=true&fillIngredients=true&apiKey=f59f88cb8fbf4ac0b0c99e345526552a";
 var dummyMovieUrl = "https://omdbapi.com/?apikey=48a5261b&t=star%20wars";
 
 function getId(id){
@@ -15,16 +15,14 @@ function createElement(parent, element, childId){
     parent.appendChild(myElement)
 }
 
-
+//fetches both api's for random recipe and random movie
 fetch(dummyRecipeUrl)
     .then(function(response){
+        console.log(response)
         return response.json();
     })
-    .then(function(data){
-        var recipe = data.results[1]
-        displayRecipe(recipe);
-    })
-
+    .then(data => displayRecipe(data)).catch(err => console.log(err))
+        
 fetch(dummyMovieUrl)
     .then(function(response){
         return response.json();
@@ -33,18 +31,20 @@ fetch(dummyMovieUrl)
         displayMovie(data);
     })
 
-function displayRecipe(recipe){
-    console.log(recipe);
+//displays random recipe
+function displayRecipe (data) {
+    console.log(data);
     createElement(yourRecipeInfo, "img", "foodImage")
-    getId("foodImage").setAttribute("src", recipe.image)
+    getId("foodImage").setAttribute("src", data.recipes[0].image)
     createElement(yourRecipeInfo, "h2", "recipeTitle")
-    getId("recipeTitle").textContent = recipe.title
+    getId("recipeTitle").textContent = data.recipes[0].title
     createElement(yourRecipeInfo, "p", "summary")
-    getId("summary").innerHTML = recipe.summary
+    getId("summary").innerHTML = data.recipes[0].summary
     createElement(yourRecipeInfo, "p", "timeRequired")
-    getId("timeRequired").textContent = "Ready in " + recipe.readyInMinutes + " minutes"
+    getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
 }
 
+//displays random movie
 function displayMovie(data){
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
@@ -67,3 +67,17 @@ function displayMovie(data){
     createElement(movieStats, "li", "runtime")
     getId("runtime").textContent = "Runtime: " + data.Runtime
 }
+
+//displays modal with results of the api's
+function randomEl(event) {
+    document.querySelector(".results-modal-window").style.display = "block";
+}
+
+//closes the modal window when displayed and redirects to landing page
+function closeBtn() {
+    window.location.href = "/"
+}
+
+
+document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
+document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
