@@ -46,6 +46,7 @@ function displayRecipe(recipe){
 }
 
 function displayMovie(data){
+    console.log(data)
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
     createElement(yourMovieInfo, "h2", "title")
