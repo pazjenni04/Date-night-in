@@ -15,16 +15,14 @@ function createElement(parent, element, childId){
     parent.appendChild(myElement)
 }
 
-
+//fetches both api's for random recipe and random movie
 fetch(dummyRecipeUrl)
     .then(function(response){
         console.log(response)
         return response.json();
     })
     .then(data => displayRecipe(data)).catch(err => console.log(err))
-        // var recipe = data.recipes[0]
-        // console.log(data)
-
+        
 fetch(dummyMovieUrl)
     .then(function(response){
         return response.json();
@@ -33,9 +31,9 @@ fetch(dummyMovieUrl)
         displayMovie(data);
     })
 
+//displays random recipe
 function displayRecipe (data) {
     console.log(data);
-
     createElement(yourRecipeInfo, "img", "foodImage")
     getId("foodImage").setAttribute("src", data.recipes[0].image)
     createElement(yourRecipeInfo, "h2", "recipeTitle")
@@ -46,6 +44,7 @@ function displayRecipe (data) {
     getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
 }
 
+//displays random movie
 function displayMovie(data){
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
@@ -69,18 +68,16 @@ function displayMovie(data){
     getId("runtime").textContent = "Runtime: " + data.Runtime
 }
 
-
+//displays modal with results of the api's
 function randomEl(event) {
-    // event.preventDefault();
-
-    // var btnclick = target.event
-
     document.querySelector(".results-modal-window").style.display = "block";
-    displayRecipe();
-    displayMovie();
+}
 
+//closes the modal window when displayed and redirects to landing page
+function closeBtn() {
+    window.location.href = "/"
 }
 
 
-
-document.getElementById("randomBtn").addEventListener("click", randomEl)
+document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
+document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
