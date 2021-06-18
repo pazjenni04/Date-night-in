@@ -46,7 +46,6 @@ function displayRecipe (data) {
 
 //displays random movie
 function displayMovie(data){
-    console.log(data)
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
     createElement(yourMovieInfo, "h2", "title")
@@ -82,12 +81,41 @@ function closeBtn() {
 
 document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
-// document.getElementById()
+
 
 //as a user when I click on the favorites tab, I want it to redirect to a seperate html page
 //on this html page, I want to display all the favorite dates saved to recall in the future
 //need to create a local storage to display onto the page
 
-// function favoriteDates() {
+console.log(yourMovieInfo);
 
+var savetolocal = JSON.parse(localStorage.getItem("favorites")) || [];  //when click button, needs to save to local storage
+
+function datelocalstorage(event) {
+    event.preventDefault();
+
+    var savetofav = {
+        favRecipe: yourRecipeInfo,
+        favMovie: yourMovieInfo,
+    }
+
+    console.log(yourMovieInfo)
+    
+    savetolocal.push(savetofav);
+
+    localStorage.setItem("favorites", JSON.stringify(savetolocal))
+
+}
+
+document.getElementById("favBtn").addEventListener("click", datelocalstorage); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
+
+// function displayFavs(){
+    // favs.forEach(function (recipesMovies){
+    //     favString+= '<li>' + favs + '</li>';
+
+    // })
+
+    // favString= '<ul>' +favString+ '</ul>'
+    // window.document.location = './favorites-index.html';
+    
 // }
