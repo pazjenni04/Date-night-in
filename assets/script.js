@@ -81,3 +81,12 @@ function closeBtn() {
 
 document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
+// document.getElementById()
+
+//as a user when I click on the favorites tab, I want it to redirect to a seperate html page
+//on this html page, I want to display all the favorite dates saved to recall in the future
+//need to create a local storage to display onto the page
+
+// function favoriteDates() {
+
+// }
