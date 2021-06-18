@@ -46,6 +46,7 @@ function displayRecipe (data) {
 
 //displays random movie
 function displayMovie(data){
+    console.log(data)
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
     createElement(yourMovieInfo, "h2", "title")
@@ -70,7 +71,7 @@ function displayMovie(data){
 
 //displays modal with results of the api's
 function randomEl(event) {
-    document.querySelector(".results-modal-window").style.display = "block";
+    document.getElementById("date-information").style.display = "block";
 }
 
 //closes the modal window when displayed and redirects to landing page
