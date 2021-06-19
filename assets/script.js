@@ -16,20 +16,27 @@ function createElement(parent, element, childId){
 }
 
 //fetches both api's for random recipe and random movie
-fetch(dummyRecipeUrl)
+fetch(dummyMovieUrl)
     .then(function(response){
         console.log(response)
         return response.json();
     })
-    .then(data => displayRecipe(data)).catch(err => console.log(err))
+
+    .then(data => {
+        localStorage.setItem(data, JSON.stringify(data));
+        return data;
+    })
+    .then (displayMovie);
         
-fetch(dummyMovieUrl)
+fetch(dummyRecipeUrl)
     .then(function(response){
         return response.json();
     })
-    .then(function(data){
-        displayMovie(data);
+    .then(data => {
+        localStorage.setItem(data, JSON.stringify(data));
+        return data;
     })
+    .then (displayRecipe);
 
 //displays random recipe
 function displayRecipe (data) {
@@ -91,31 +98,38 @@ console.log(yourMovieInfo);
 
 var savetolocal = JSON.parse(localStorage.getItem("favorites")) || [];  //when click button, needs to save to local storage
 
+
+//local storage works -- now need to only grab certain elements from local storage to display onto favorite-index.html
 function datelocalstorage(event) {
     event.preventDefault();
 
-    var savetofav = {
-        favRecipe: yourRecipeInfo,
-        favMovie: yourMovieInfo,
-    }
+    // var savetofav = {
+    //     favRecipe: yourRecipeInfo,
+    //     favMovie: yourMovieInfo,
+    // }
 
-    console.log(yourMovieInfo)
+    // console.log(yourMovieInfo)
     
-    savetolocal.push(savetofav);
+    // savetolocal.push(savetofav);
 
-    localStorage.setItem("favorites", JSON.stringify(savetolocal))
+    // localStorage.setItem("favorites", JSON.stringify(savetolocal))
+
+    displayMovie(JSON.parse(localStorage.getItem('movie')));
+    displayRecipe(JSON.parse(localStorage.getItem('recipe')));
 
 }
 
 document.getElementById("favBtn").addEventListener("click", datelocalstorage); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
 
-// function displayFavs(){
-    // favs.forEach(function (recipesMovies){
-    //     favString+= '<li>' + favs + '</li>';
 
-    // })
+//when click, i need this to open second html file and display local storage results
+// document.getElementById('favlink').addEventListener("click", function (event){
+//     event.preventDefault();
 
-    // favString= '<ul>' +favString+ '</ul>'
-    // window.document.location = './favorites-index.html';
-    
-// }
+//     var recipeResults = document.createElement('div')
+//     var favoriteResults = document.getElementById('favorite-results');
+//     recipeResults.innerHTML = displayRecipe(JSON.parse(localStorage.getItem('recipe')));
+
+//     favoriteResults.appendChild(recipeResults);
+
+// })

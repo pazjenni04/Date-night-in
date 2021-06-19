@@ -52,8 +52,27 @@
   margin: 0 0 15px;
 }
 
+.fav-container {
+  margin: 50px;
+  padding: 50px;
+  border: 50px;
+  display: block;
+  position: relative;
+}
+
 
 #date-information {
   overflow: scroll;
   display: none;
+}
+
+#fav-header {
+  font-size: 100px;
+  display: block;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 20px;
+  
+
 }
