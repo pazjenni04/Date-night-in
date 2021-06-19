@@ -1,3 +1,12 @@
+
+.pure-menu {
+    direction: rtl;
+    text-align: left;
+}
+
+.pure-menu ul {
+    direction: ltr;
+}
 .modal-window {
   position: fixed;
   background-color: rgba(200, 200, 200, 0.75);
@@ -20,7 +29,7 @@
 }
 
 .modal-window>div {
-  width: 400px;
+  width: 500px;
   position: relative;
   margin: 10% auto;
   padding: 2rem;
@@ -53,4 +62,26 @@
   margin: 0 0 15px;
 }
 
+.fav-container {
+  margin: 50px;
+  padding: 50px;
+  border: 50px;
+  display: block;
+  position: relative;
+}
 
+#date-information {
+  overflow: scroll;
+  display: none;
+}
+
+#fav-header {
+  font-size: 100px;
+  display: block;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 20px;
+  
+
+}

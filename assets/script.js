@@ -108,6 +108,19 @@ closeTestBtn.addEventListener("click", function(){
 
 
 //fetches both api's for random recipe and random movie
+
+fetch(dummyMovieUrl)
+    .then(function(response){
+        console.log(response)
+        return response.json();
+    })
+
+    .then(data => {
+        localStorage.setItem(data, JSON.stringify(data));
+        return data;
+    })
+    .then (displayMovie);
+        
 fetch(dummyRecipeUrlNoKey + 
     jeremyApiKey
     // jenniferApiKey
@@ -115,18 +128,13 @@ fetch(dummyRecipeUrlNoKey +
     // gianniApiKey
     )
     .then(function(response){
-        console.log(response)
         return response.json();
     })
-    .then(data => displayRecipe(data)).catch(err => console.log(err))
-        
-fetch(dummyMovieUrl)
-    .then(function(response){
-        return response.json();
+    .then(data => {
+        localStorage.setItem(data, JSON.stringify(data));
+        return data;
     })
-    .then(function(data){
-        displayMovie(data);
-    })
+    .then (displayRecipe);
 
 //displays random recipe
 function displayRecipe (data) {
@@ -143,7 +151,6 @@ function displayRecipe (data) {
 
 //displays random movie
 function displayMovie(data){
-    console.log(data)
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
     createElement(yourMovieInfo, "h2", "title")
@@ -179,4 +186,49 @@ function closeBtn() {
 
 document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
+
+
+//as a user when I click on the favorites tab, I want it to redirect to a seperate html page
+//on this html page, I want to display all the favorite dates saved to recall in the future
+//need to create a local storage to display onto the page
+
+console.log(yourMovieInfo);
+
+var savetolocal = JSON.parse(localStorage.getItem("favorites")) || [];  //when click button, needs to save to local storage
+
+
+//local storage works -- now need to only grab certain elements from local storage to display onto favorite-index.html
+function datelocalstorage(event) {
+    event.preventDefault();
+
+    // var savetofav = {
+    //     favRecipe: yourRecipeInfo,
+    //     favMovie: yourMovieInfo,
+    // }
+
+    // console.log(yourMovieInfo)
+    
+    // savetolocal.push(savetofav);
+
+    // localStorage.setItem("favorites", JSON.stringify(savetolocal))
+
+    displayMovie(JSON.parse(localStorage.getItem('movie')));
+    displayRecipe(JSON.parse(localStorage.getItem('recipe')));
+
+}
+
+document.getElementById("favBtn").addEventListener("click", datelocalstorage); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
+
+
+//when click, i need this to open second html file and display local storage results
+// document.getElementById('favlink').addEventListener("click", function (event){
+//     event.preventDefault();
+
+//     var recipeResults = document.createElement('div')
+//     var favoriteResults = document.getElementById('favorite-results');
+//     recipeResults.innerHTML = displayRecipe(JSON.parse(localStorage.getItem('recipe')));
+
+//     favoriteResults.appendChild(recipeResults);
+
+// })
 
