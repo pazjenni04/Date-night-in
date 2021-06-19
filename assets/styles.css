@@ -1,91 +1,92 @@
 
 .pure-menu {
-    direction: rtl;
-    text-align: left;
+  direction: rtl;
+  text-align: left;
 }
 
 .pure-menu ul {
-    direction: ltr;
+  direction: ltr;
 }
 .modal-window {
-  position: fixed;
-  background-color: rgba(200, 200, 200, 0.75);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  opacity: 0;
-  pointer-events: none;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
+position: fixed;
+background-color: rgba(200, 200, 200, 0.75);
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 999;
+opacity: 0;
+pointer-events: none;
+-webkit-transition: all 0.3s;
+-moz-transition: all 0.3s;
+transition: all 0.3s;
+overflow: scroll;
 }
 
 .modal-window:target {
-  opacity: 1;
-  pointer-events: auto;
+opacity: 1;
+pointer-events: auto;
 }
 
 .modal-window>div {
-  width: 500px;
-  position: relative;
-  margin: 10% auto;
-  padding: 2rem;
-  background: #fff;
-  color: #444;
+width: 500px;
+position: relative;
+margin: 10% auto;
+padding: 2rem;
+background: #fff;
+color: #444;
 }
 
 .modal-window header {
-  font-weight: bold;
+font-weight: bold;
 }
 
 .modal-close {
-  color: #aaa;
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 70px;
-  text-decoration: none;
+color: #aaa;
+line-height: 50px;
+font-size: 80%;
+position: absolute;
+right: 0;
+text-align: center;
+top: 0;
+width: 70px;
+text-decoration: none;
 }
 
 .modal-close:hover {
-  color: #000;
+color: #000;
 }
 
 .modal-window h1 {
-  font-size: 150%;
-  margin: 0 0 15px;
+font-size: 150%;
+margin: 0 0 15px;
 }
 
 .fav-container {
-  margin: 50px;
-  padding: 50px;
-  border: 50px;
-  display: block;
-  position: relative;
+margin: 50px;
+padding: 50px;
+border: 50px;
+display: block;
+position: relative;
 }
 
-
 #date-information {
-  overflow: scroll;
-  display: none;
+overflow: scroll;
+display: none;
 }
 
 #fav-header {
-  font-size: 100px;
-  display: block;
-  margin: 20px;
-  padding: 20px;
-  text-align: center;
-  border: 20px;
-  
+font-size: 100px;
+display: block;
+margin: 20px;
+padding: 20px;
+text-align: center;
+border: 20px;
+
 
 }
 
+/* slideshowCSS STYLE SHEET/*
 * {box-sizing:border-box}
 
 /* Slideshow container */

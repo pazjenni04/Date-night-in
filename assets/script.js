@@ -1,7 +1,12 @@
 var dummyRecipeUrl = "https://api.spoonacular.com/recipes/random?number=1&fab4&addRecipeInformation=true&fillIngredients=true&apiKey=f59f88cb8fbf4ac0b0c99e345526552a";
+var dummyRecipeUrlNoKey = "https://api.spoonacular.com/recipes/random?number=1&fab4&addRecipeInformation=true&fillIngredients=true&apiKey=";
 var dummyMovieUrl = "https://omdbapi.com/?apikey=48a5261b&t=star%20wars";
+var gianniApiKey = "6b1663d8d8c04fd69200905f3c895ee5"
+var jenniferApiKey = "f59f88cb8fbf4ac0b0c99e345526552a"
+var janayApiKey = "d509b30dc9334ed1b6d3aa1f61ece62b"
+var jeremyApiKey = "646a3c17f65f48eb8dc89229bd07fab4"
 
-function getId(id) {
+function getId(id){
     var myId = document.getElementById(id)
     return myId
 }
@@ -9,15 +14,103 @@ function getId(id) {
 var yourMovieInfo = getId("yourMovieInfo")
 var yourRecipeInfo = getId("yourRecipeInfo")
 
-function createElement(parent, element, childId) {
+function createElement(parent, element, childId){
     var myElement = document.createElement(element);
     myElement.setAttribute("id", childId)
     parent.appendChild(myElement)
 }
 
+var cuisine = [
+    "African",
+    "American",
+    "British",
+    "Cajun",
+    "Caribbean",
+    "Chinese",
+    "Eastern European",
+    "European	",
+    "French",
+    "German",
+    "Greek",
+    "Indian",
+    "Irish",
+    "Italian",
+    "Japanese",
+    "Jewish",
+    "Korean",
+    "Latin American",
+    "Mediterranean",
+    "Mexican",
+    "Middle Eastern",
+    "Nordic",
+    "Southern",
+    "Spanish",
+    "Thai",
+    "Vietnamese",
+]
+
+var cuisineEl = getId("cuisine")
+for (var i = 0; i < cuisine.length; i++){
+    createElement(cuisineEl, "option", cuisine[i])
+    getId(cuisine[i]).textContent = cuisine[i]
+}
+
+var diet = [
+    "gluten free",
+    "ketogenic",
+    "vegetarian",
+    "lacto-vegetarian",
+    "ovo-vegetarian",
+    "vegan",
+    "pescetarian",
+    "paleo",
+    "primal",
+    "whole30"
+]
+
+var dietEl = getId("diet")
+for (var i = 0; i < diet.length; i++){
+    createElement(dietEl, "option", diet[i])
+    getId(diet[i]).textContent = diet[i]
+}
+
+var intolerance = [
+    "dairy",
+    "egg",
+    "gluten",
+    "grain",
+    "peanut",
+    "seafood",
+    "sesame",
+    "shellfish",
+    "soy",
+    "sulfite",
+    "tree nut",
+    "wheat"
+]
+
+var intoleranceEl = getId("intolerance")
+for (var i = 0; i < intolerance.length; i++){
+    createElement(intoleranceEl, "option", intolerance[i])
+    getId(intolerance[i]).textContent = intolerance[i]
+}
+createElement(intoleranceEl, "ul", "intoleranceList")
+createElement(getId("intoleranceList"), "li", "test")
+var test = getId("test")
+test.textContent = "test"
+createElement(test, "button", "closeTestBtn")
+var closeTestBtn = getId("closeTestBtn")
+closeTestBtn.textContent = "X"
+closeTestBtn.addEventListener("click", function(){
+    test.parentNode.removeChild(test)
+})
+
+
+
 //fetches both api's for random recipe and random movie
+
 fetch(dummyMovieUrl)
-    .then(function (response) {
+    .then(function(response){
         console.log(response)
         return response.json();
     })
@@ -26,20 +119,25 @@ fetch(dummyMovieUrl)
         localStorage.setItem(data, JSON.stringify(data));
         return data;
     })
-    .then(displayMovie);
-
-fetch(dummyRecipeUrl)
-    .then(function (response) {
+    .then (displayMovie);
+        
+fetch(dummyRecipeUrlNoKey + 
+    jeremyApiKey
+    // jenniferApiKey
+    // janayApiKey
+    // gianniApiKey
+    )
+    .then(function(response){
         return response.json();
     })
     .then(data => {
         localStorage.setItem(data, JSON.stringify(data));
         return data;
     })
-    .then(displayRecipe);
+    .then (displayRecipe);
 
 //displays random recipe
-function displayRecipe(data) {
+function displayRecipe (data) {
     console.log(data);
     createElement(yourRecipeInfo, "img", "foodImage")
     getId("foodImage").setAttribute("src", data.recipes[0].image)
@@ -52,7 +150,7 @@ function displayRecipe(data) {
 }
 
 //displays random movie
-function displayMovie(data) {
+function displayMovie(data){
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
     createElement(yourMovieInfo, "h2", "title")
@@ -109,7 +207,7 @@ function datelocalstorage(event) {
     // }
 
     // console.log(yourMovieInfo)
-
+    
     // savetolocal.push(savetofav);
 
     // localStorage.setItem("favorites", JSON.stringify(savetolocal))
@@ -133,33 +231,33 @@ document.getElementById("favBtn").addEventListener("click", datelocalstorage); /
 //     favoriteResults.appendChild(recipeResults);
 
 // })
-
+//slideshow JAVASCRIPT//
 var slideIndex = 1;
 showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-    showSlides(slideIndex += n);
+  showSlides(slideIndex += n);
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-    showSlides(slideIndex = n);
+  showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("dot");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
 }
 
