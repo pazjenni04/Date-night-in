@@ -1,7 +1,7 @@
 var dummyRecipeUrl = "https://api.spoonacular.com/recipes/random?number=1&fab4&addRecipeInformation=true&fillIngredients=true&apiKey=f59f88cb8fbf4ac0b0c99e345526552a";
 var dummyMovieUrl = "https://omdbapi.com/?apikey=48a5261b&t=star%20wars";
 
-function getId(id){
+function getId(id) {
     var myId = document.getElementById(id)
     return myId
 }
@@ -9,7 +9,7 @@ function getId(id){
 var yourMovieInfo = getId("yourMovieInfo")
 var yourRecipeInfo = getId("yourRecipeInfo")
 
-function createElement(parent, element, childId){
+function createElement(parent, element, childId) {
     var myElement = document.createElement(element);
     myElement.setAttribute("id", childId)
     parent.appendChild(myElement)
@@ -17,7 +17,7 @@ function createElement(parent, element, childId){
 
 //fetches both api's for random recipe and random movie
 fetch(dummyMovieUrl)
-    .then(function(response){
+    .then(function (response) {
         console.log(response)
         return response.json();
     })
@@ -26,20 +26,20 @@ fetch(dummyMovieUrl)
         localStorage.setItem(data, JSON.stringify(data));
         return data;
     })
-    .then (displayMovie);
-        
+    .then(displayMovie);
+
 fetch(dummyRecipeUrl)
-    .then(function(response){
+    .then(function (response) {
         return response.json();
     })
     .then(data => {
         localStorage.setItem(data, JSON.stringify(data));
         return data;
     })
-    .then (displayRecipe);
+    .then(displayRecipe);
 
 //displays random recipe
-function displayRecipe (data) {
+function displayRecipe(data) {
     console.log(data);
     createElement(yourRecipeInfo, "img", "foodImage")
     getId("foodImage").setAttribute("src", data.recipes[0].image)
@@ -52,7 +52,7 @@ function displayRecipe (data) {
 }
 
 //displays random movie
-function displayMovie(data){
+function displayMovie(data) {
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
     createElement(yourMovieInfo, "h2", "title")
@@ -109,7 +109,7 @@ function datelocalstorage(event) {
     // }
 
     // console.log(yourMovieInfo)
-    
+
     // savetolocal.push(savetofav);
 
     // localStorage.setItem("favorites", JSON.stringify(savetolocal))
@@ -133,3 +133,33 @@ document.getElementById("favBtn").addEventListener("click", datelocalstorage); /
 //     favoriteResults.appendChild(recipeResults);
 
 // })
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
+
