@@ -15,6 +15,93 @@ function createElement(parent, element, childId){
     parent.appendChild(myElement)
 }
 
+var cuisine = [
+    "African",
+    "American",
+    "British",
+    "Cajun",
+    "Caribbean",
+    "Chinese",
+    "Eastern European",
+    "European	",
+    "French",
+    "German",
+    "Greek",
+    "Indian",
+    "Irish",
+    "Italian",
+    "Japanese",
+    "Jewish",
+    "Korean",
+    "Latin American",
+    "Mediterranean",
+    "Mexican",
+    "Middle Eastern",
+    "Nordic",
+    "Southern",
+    "Spanish",
+    "Thai",
+    "Vietnamese",
+]
+
+var cuisineEl = getId("cuisine")
+for (var i = 0; i < cuisine.length; i++){
+    createElement(cuisineEl, "option", cuisine[i])
+    getId(cuisine[i]).textContent = cuisine[i]
+}
+
+var diet = [
+    "gluten free",
+    "ketogenic",
+    "vegetarian",
+    "lacto-vegetarian",
+    "ovo-vegetarian",
+    "vegan",
+    "pescetarian",
+    "paleo",
+    "primal",
+    "whole30"
+]
+
+var dietEl = getId("diet")
+for (var i = 0; i < diet.length; i++){
+    createElement(dietEl, "option", diet[i])
+    getId(diet[i]).textContent = diet[i]
+}
+
+var intolerance = [
+    "dairy",
+    "egg",
+    "gluten",
+    "grain",
+    "peanut",
+    "seafood",
+    "sesame",
+    "shellfish",
+    "soy",
+    "sulfite",
+    "tree nut",
+    "wheat"
+]
+
+var intoleranceEl = getId("intolerance")
+for (var i = 0; i < intolerance.length; i++){
+    createElement(intoleranceEl, "option", intolerance[i])
+    getId(intolerance[i]).textContent = intolerance[i]
+}
+createElement(intoleranceEl, "ul", "intoleranceList")
+createElement(getId("intoleranceList"), "li", "test")
+var test = getId("test")
+test.textContent = "test"
+createElement(test, "button", "closeTestBtn")
+var closeTestBtn = getId("closeTestBtn")
+closeTestBtn.textContent = "X"
+closeTestBtn.addEventListener("click", function(){
+    test.parentNode.removeChild(test)
+})
+
+
+
 //fetches both api's for random recipe and random movie
 fetch(dummyRecipeUrl)
     .then(function(response){
@@ -82,3 +169,4 @@ function closeBtn() {
 
 document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
+

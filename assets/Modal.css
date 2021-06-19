@@ -25,6 +25,7 @@
   padding: 2rem;
   background: #fff;
   color: #444;
+  overflow: scroll;
 }
 
 .modal-window header {

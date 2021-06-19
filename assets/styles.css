@@ -11,6 +11,7 @@
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+  overflow: scroll;
 }
 
 .modal-window:target {
@@ -53,7 +54,3 @@
 }
 
 
-#date-information {
-  overflow: scroll;
-  display: none;
-}
