@@ -1,5 +1,10 @@
 var dummyRecipeUrl = "https://api.spoonacular.com/recipes/random?number=1&fab4&addRecipeInformation=true&fillIngredients=true&apiKey=f59f88cb8fbf4ac0b0c99e345526552a";
+var dummyRecipeUrlNoKey = "https://api.spoonacular.com/recipes/random?number=1&fab4&addRecipeInformation=true&fillIngredients=true&apiKey=";
 var dummyMovieUrl = "https://omdbapi.com/?apikey=48a5261b&t=star%20wars";
+var gianniApiKey = "6b1663d8d8c04fd69200905f3c895ee5"
+var jenniferApiKey = "f59f88cb8fbf4ac0b0c99e345526552a"
+var janayApiKey = "d509b30dc9334ed1b6d3aa1f61ece62b"
+var jeremyApiKey = "646a3c17f65f48eb8dc89229bd07fab4"
 
 function getId(id){
     var myId = document.getElementById(id)
@@ -103,7 +108,12 @@ closeTestBtn.addEventListener("click", function(){
 
 
 //fetches both api's for random recipe and random movie
-fetch(dummyRecipeUrl)
+fetch(dummyRecipeUrlNoKey + 
+    jeremyApiKey
+    // jenniferApiKey
+    // janayApiKey
+    // gianniApiKey
+    )
     .then(function(response){
         console.log(response)
         return response.json();
