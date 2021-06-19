@@ -105,7 +105,16 @@ closeTestBtn.addEventListener("click", function(){
     test.parentNode.removeChild(test)
 })
 
-
+// {
+//     '6/19/2021 1:26:25 PM': {
+//         recipe,
+//         movie
+//     },
+//     '6/19/2021 1:29:25 PM': {
+//         recipe,
+//         movie
+//     }    
+// }
 
 //fetches both api's for random recipe and random movie
 
@@ -231,4 +240,64 @@ document.getElementById("favBtn").addEventListener("click", datelocalstorage); /
 //     favoriteResults.appendChild(recipeResults);
 
 // })
+//slideshow JAVASCRIPT//
+// <!-- <div class="mySlides fade">
+// <div class="numbertext">1 / 3</div>
+// <img src="./assets/images/download.jpg" style="width:100%">
+// <div class="text">Caption Text</div>
+// </div>
+
+// <div class="mySlides fade">
+// <div class="numbertext">2 / 3</div>
+// <img src="./assets/images/images-1.jpg" style="width:100%">
+// <div class="text">Caption Two</div>
+// </div>
+
+// <div class="mySlides fade">
+// <div class="numbertext">3 / 3</div>
+// <img src="./assets/images/images-3.jpg" style="width:100%">
+// <div class="text">Caption Three</div>
+// </div>
+
+// localStorage.setItem('slide1', JSON.stringify({
+//     numberText: 1,
+//     imgSrc: './assets/images/download.jpg',
+//     captionText: 'Caption One'
+// }))
+// localStorage.setItem('slide2', JSON.stringify({
+//     numberText: 2,
+//     imgSrc: './assets/images/images-1.jpg',
+//     captionText: 'Caption Two'
+// }))
+
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
 
