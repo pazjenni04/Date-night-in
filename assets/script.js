@@ -116,20 +116,59 @@ closeTestBtn.addEventListener("click", function(){
 //     }    
 // }
 
-//fetches both api's for random recipe and random movie
+//fetches both api's for random recipe and random movie and saves to local storage
+function saveToLocal(){
 
-fetch(dummyMovieUrl)
+    fetch(dummyRecipeUrlNoKey + 
+    jeremyApiKey
+    // jenniferApiKey
+    // janayApiKey
+    // gianniApiKey)
+    )
     .then(function(response){
         console.log(response)
         return response.json();
     })
 
     .then(data => {
-        localStorage.setItem(data, JSON.stringify(data));
+        var recipeData = {
+
+            recipeImg: `${data.recipes[0].image}`,
+            recipeTitle: `${data.recipes[0].title}`,
+            recipeSummary: `${data.recipes[0].summary}`,
+
+        }
+        localStorage.setItem("recipeData", JSON.stringify(recipeData));
         return data;
     })
-    .then (displayMovie);
+
+fetch(dummyMovieUrl)
+    .then(function(response){
+        return response.json();
+    })
+    .then(data => {
+        var MovieData = {
+
+            movieImg: `${data.Poster}`,
+            movieTitle: `${data.Title}`,
         
+        }
+        localStorage.setItem("movieData", JSON.stringify(MovieData));
+        console.log(MovieData)
+        return data;
+    })
+
+}
+
+//fetches data to be displayed onto the page
+fetch(dummyMovieUrl)
+    .then(function(response){
+        console.log(response)
+        return response.json();
+    })
+
+    .then(data => displayMovie(data))
+   
 fetch(dummyRecipeUrlNoKey + 
     jeremyApiKey
     // jenniferApiKey
@@ -139,11 +178,7 @@ fetch(dummyRecipeUrlNoKey +
     .then(function(response){
         return response.json();
     })
-    .then(data => {
-        localStorage.setItem(data, JSON.stringify(data));
-        return data;
-    })
-    .then (displayRecipe);
+    .then(data => displayRecipe(data));
 
 //displays random recipe
 function displayRecipe (data) {
@@ -157,6 +192,7 @@ function displayRecipe (data) {
     createElement(yourRecipeInfo, "p", "timeRequired")
     getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
 }
+
 
 //displays random movie
 function displayMovie(data){
@@ -197,49 +233,10 @@ document.getElementById("randomBtn").addEventListener("click", randomEl) //rando
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
 
 
-//as a user when I click on the favorites tab, I want it to redirect to a seperate html page
-//on this html page, I want to display all the favorite dates saved to recall in the future
-//need to create a local storage to display onto the page
-
-console.log(yourMovieInfo);
-
-var savetolocal = JSON.parse(localStorage.getItem("favorites")) || [];  //when click button, needs to save to local storage
+document.getElementById("favBtn").addEventListener("click", saveToLocal); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
 
 
-//local storage works -- now need to only grab certain elements from local storage to display onto favorite-index.html
-function datelocalstorage(event) {
-    event.preventDefault();
 
-    // var savetofav = {
-    //     favRecipe: yourRecipeInfo,
-    //     favMovie: yourMovieInfo,
-    // }
-
-    // console.log(yourMovieInfo)
-    
-    // savetolocal.push(savetofav);
-
-    // localStorage.setItem("favorites", JSON.stringify(savetolocal))
-
-    displayMovie(JSON.parse(localStorage.getItem('movie')));
-    displayRecipe(JSON.parse(localStorage.getItem('recipe')));
-
-}
-
-document.getElementById("favBtn").addEventListener("click", datelocalstorage); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
-
-
-//when click, i need this to open second html file and display local storage results
-// document.getElementById('favlink').addEventListener("click", function (event){
-//     event.preventDefault();
-
-//     var recipeResults = document.createElement('div')
-//     var favoriteResults = document.getElementById('favorite-results');
-//     recipeResults.innerHTML = displayRecipe(JSON.parse(localStorage.getItem('recipe')));
-
-//     favoriteResults.appendChild(recipeResults);
-
-// })
 //slideshow JAVASCRIPT//
 // <!-- <div class="mySlides fade">
 // <div class="numbertext">1 / 3</div>
@@ -271,33 +268,36 @@ document.getElementById("favBtn").addEventListener("click", datelocalstorage); /
 // }))
 
 
-var slideIndex = 1;
-showSlides(slideIndex);
+// var slideIndex = slideIx;
+// showSlides(slideIndex);
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+// var slideIndex = 1;
+// showSlides(slideIndex);
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+// // Next/previous controls
+// function plusSlides(n) {
+//   showSlides(slideIndex += n);
+// }
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
+// // Thumbnail image controls
+// function currentSlide(n) {
+//   showSlides(slideIndex = n);
+// }
+
+// function showSlides(n) {
+//   var i;
+//   var slides = document.getElementsByClassName("mySlides");
+//   var dots = document.getElementsByClassName("dot");
+//   if (n > slides.length) {slideIndex = 1}
+//   if (n < 1) {slideIndex = slides.length}
+//   for (i = 0; i < slides.length; i++) {
+//       slides[i].style.display = "none";
+//   }
+//   for (i = 0; i < dots.length; i++) {
+//       dots[i].className = dots[i].className.replace(" active", "");
+//   }
   
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
+//   slides[slideIndex-1].style.display = "block";
+//   dots[slideIndex-1].className += " active";
+// }
 
