@@ -128,7 +128,6 @@ function saveToLocal(){
     // gianniApiKey)
     )
     .then(function(response){
-        console.log(response)
         return response.json();
     })
 
@@ -156,7 +155,6 @@ fetch(dummyMovieUrl)
         
         }
         localStorage.setItem("movieData", JSON.stringify(MovieData));
-        console.log(MovieData)
         return data;
     })
 
@@ -165,7 +163,6 @@ fetch(dummyMovieUrl)
 //fetches data to be displayed onto the page
 fetch(dummyMovieUrl)
     .then(function(response){
-        console.log(response)
         return response.json();
     })
 
@@ -182,9 +179,8 @@ fetch(dummyRecipeUrlNoKey +
     })
     .then(data => displayRecipe(data));
 
-//displays random recipe
+// displays random recipe
 function displayRecipe (data) {
-    console.log(data);
     createElement(yourRecipeInfo, "img", "foodImage")
     getId("foodImage").setAttribute("src", data.recipes[0].image)
     createElement(yourRecipeInfo, "h2", "recipeTitle")
@@ -258,31 +254,19 @@ document.getElementById("favBtn").addEventListener("click", saveToLocal); //when
 // <div class="text">Caption Three</div>
 // </div>
 
-function localtoSlideshow () {
+ 
 
-if(saveToLocal){
-    localStorage.getItem(saveToLocal);
-    var slide1 = document.createElement("div");
-
-    slide1.innerHTML= `${data.recipes[0].image}`;
-    slidespace1.appendChild(slide1);
-    
-
-}
-// localStorage.setItem('slide2', JSON.stringify({
-//     numberText: 2,
-//     imgSrc: `${data.recipes[0].image}`,
-//     captionText: `${data.recipes[0].title}`,
+JSON.parse(localStorage.getItem('movieData'))
+    // numberText: 1,
+    // imgsrc: localStorage.getitem("movieImg")
+    // captionText: "Favorite Recipe/Movie",
 // }))
 // localStorage.setItem('slide2', JSON.stringify({
 //     numberText: 2,
 //     imgSrc: `${data.recipes[0].image}`,
-//     captionText: `${data.recipes[0].title}`,
+//     captionText: "Favorite Recipe/Movie",
 // }))
-}
 
-var slideIndex = localtoSlideshow();
-showSlides(slideIndex);
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -312,5 +296,17 @@ function showSlides(n) {
   
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
+
 }
 
+
+
+
+    
+
+   
+    
+    
+
+
+localtoSlideshow();
