@@ -117,8 +117,7 @@ closeTestBtn.addEventListener("click", function(){
 // }
 
 //fetches both api's for random recipe and random movie and saves to local storage
-function saveToLocal(event){
-    event.preventDefault();
+function saveToLocal(){
 
     fetch(dummyRecipeUrlNoKey + 
     jeremyApiKey
