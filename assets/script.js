@@ -158,12 +158,6 @@ fetch(dummyMovieUrl)
         return data;
     })
 
-    // var object = {
-    //     "recipeData": recipeData,
-    //     "movieData": movieData,
-    // }
-
-    // localStorage.setItem("data", JSON.stringify(object))
 }
 
 //fetches data to be displayed onto the page
