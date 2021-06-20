@@ -117,8 +117,8 @@ closeTestBtn.addEventListener("click", function(){
 // }
 
 //fetches both api's for random recipe and random movie and saves to local storage
-
-function saveToLocal(){
+function saveToLocal(event){
+    event.preventDefault();
 
     fetch(dummyRecipeUrlNoKey + 
     jeremyApiKey
@@ -137,13 +137,11 @@ function saveToLocal(){
             recipeImg: `${data.recipes[0].image}`,
             recipeTitle: `${data.recipes[0].title}`,
             recipeSummary: `${data.recipes[0].summary}`,
-            recipeTime: `${data.recipes[0].readyInMinutes}`,
 
         }
         localStorage.setItem("recipeData", JSON.stringify(recipeData));
         return data;
     })
-    .then (displayRecipe);
 
 fetch(dummyMovieUrl)
     .then(function(response){
@@ -160,15 +158,33 @@ fetch(dummyMovieUrl)
         console.log(MovieData)
         return data;
     })
-    .then (displayMovie);
 
-    var object = {
-        "recipeData": recipeData,
-        "movieData": movieData,
-    }
+    // var object = {
+    //     "recipeData": recipeData,
+    //     "movieData": movieData,
+    // }
 
-    localStorage.setItem("data", JSON.stringify(object))
+    // localStorage.setItem("data", JSON.stringify(object))
 }
+
+fetch(dummyMovieUrl)
+    .then(function(response){
+        console.log(response)
+        return response.json();
+    })
+
+    .then(data => displayMovie(data))
+   
+fetch(dummyRecipeUrlNoKey + 
+    jeremyApiKey
+    // jenniferApiKey
+    // janayApiKey
+    // gianniApiKey
+    )
+    .then(function(response){
+        return response.json();
+    })
+    .then(data => displayRecipe(data));
 
 //displays random recipe
 function displayRecipe (data) {
@@ -219,16 +235,11 @@ function closeBtn() {
 }
 
 
-document.getElementById("randomBtn").addEventListener("click", saveToLocal) //random btn that user clicks to generate random movie and recipe
+document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
 
 
-//as a user when I click on the favorites tab, I want it to redirect to a seperate html page
-//on this html page, I want to display all the favorite dates saved to recall in the future
-//need to create a local storage to display onto the page
-
-
-// document.getElementById("favBtn").addEventListener("click", showslides(n)); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
+document.getElementById("favBtn").addEventListener("click", saveToLocal); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
 
 
 
@@ -251,52 +262,48 @@ document.getElementById("closeBtn").addEventListener("click", closeBtn) //close 
 // <div class="text">Caption Three</div>
 // </div>
 
-localStorage.setItem('slide1', JSON.stringify({
-    numberText: 1,
-    imgSrc: './assets/images/download.jpg',
-    captionText: 'Caption One'
-}))
-localStorage.setItem('slide2', JSON.stringify({
-    numberText: 2,
-    imgSrc: './assets/images/images-1.jpg',
-    captionText: 'Caption Two'
-}))
+// localStorage.setItem('slide1', JSON.stringify({
+//     numberText: 1,
+//     imgSrc: './assets/images/download.jpg',
+//     captionText: 'Caption One'
+// }))
+// localStorage.setItem('slide2', JSON.stringify({
+//     numberText: 2,
+//     imgSrc: './assets/images/images-1.jpg',
+//     captionText: 'Caption Two'
+// }))
 
-var slideIx = localStorage.getItem(`${data.recipes[0].image}`);
-if (slideIx === null) {
-    slideIx = 1;
-}
 
-var slideIndex = slideIx;
-showSlides(slideIndex);
+// var slideIndex = slideIx;
+// showSlides(slideIndex);
 
-var slideIndex = 1;
-showSlides(slideIndex);
+// var slideIndex = 1;
+// showSlides(slideIndex);
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+// // Next/previous controls
+// function plusSlides(n) {
+//   showSlides(slideIndex += n);
+// }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+// // Thumbnail image controls
+// function currentSlide(n) {
+//   showSlides(slideIndex = n);
+// }
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
+// function showSlides(n) {
+//   var i;
+//   var slides = document.getElementsByClassName("mySlides");
+//   var dots = document.getElementsByClassName("dot");
+//   if (n > slides.length) {slideIndex = 1}
+//   if (n < 1) {slideIndex = slides.length}
+//   for (i = 0; i < slides.length; i++) {
+//       slides[i].style.display = "none";
+//   }
+//   for (i = 0; i < dots.length; i++) {
+//       dots[i].className = dots[i].className.replace(" active", "");
+//   }
   
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
+//   slides[slideIndex-1].style.display = "block";
+//   dots[slideIndex-1].className += " active";
+// }
 
