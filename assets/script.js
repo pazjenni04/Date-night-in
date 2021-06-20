@@ -6,6 +6,8 @@ var jenniferApiKey = "f59f88cb8fbf4ac0b0c99e345526552a"
 var janayApiKey = "d509b30dc9334ed1b6d3aa1f61ece62b"
 var jeremyApiKey = "646a3c17f65f48eb8dc89229bd07fab4"
 
+var slidespace1 = document.querySelector(".numbertext");
+
 function getId(id){
     var myId = document.getElementById(id)
     return myId
@@ -256,48 +258,59 @@ document.getElementById("favBtn").addEventListener("click", saveToLocal); //when
 // <div class="text">Caption Three</div>
 // </div>
 
-// localStorage.setItem('slide1', JSON.stringify({
-//     numberText: 1,
-//     imgSrc: './assets/images/download.jpg',
-//     captionText: 'Caption One'
+function localtoSlideshow () {
+
+if(saveToLocal){
+    localStorage.getItem(saveToLocal);
+    var slide1 = document.createElement("div");
+
+    slide1.innerHTML= `${data.recipes[0].image}`;
+    slidespace1.appendChild(slide1);
+    
+
+}
+// localStorage.setItem('slide2', JSON.stringify({
+//     numberText: 2,
+//     imgSrc: `${data.recipes[0].image}`,
+//     captionText: `${data.recipes[0].title}`,
 // }))
 // localStorage.setItem('slide2', JSON.stringify({
 //     numberText: 2,
-//     imgSrc: './assets/images/images-1.jpg',
-//     captionText: 'Caption Two'
+//     imgSrc: `${data.recipes[0].image}`,
+//     captionText: `${data.recipes[0].title}`,
 // }))
+}
 
+var slideIndex = localtoSlideshow();
+showSlides(slideIndex);
 
-// var slideIndex = slideIx;
-// showSlides(slideIndex);
+var slideIndex = 1;
+showSlides(slideIndex);
 
-// var slideIndex = 1;
-// showSlides(slideIndex);
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
 
-// // Next/previous controls
-// function plusSlides(n) {
-//   showSlides(slideIndex += n);
-// }
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
 
-// // Thumbnail image controls
-// function currentSlide(n) {
-//   showSlides(slideIndex = n);
-// }
-
-// function showSlides(n) {
-//   var i;
-//   var slides = document.getElementsByClassName("mySlides");
-//   var dots = document.getElementsByClassName("dot");
-//   if (n > slides.length) {slideIndex = 1}
-//   if (n < 1) {slideIndex = slides.length}
-//   for (i = 0; i < slides.length; i++) {
-//       slides[i].style.display = "none";
-//   }
-//   for (i = 0; i < dots.length; i++) {
-//       dots[i].className = dots[i].className.replace(" active", "");
-//   }
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
   
-//   slides[slideIndex-1].style.display = "block";
-//   dots[slideIndex-1].className += " active";
-// }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
 
