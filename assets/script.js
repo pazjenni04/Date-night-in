@@ -166,6 +166,7 @@ fetch(dummyMovieUrl)
     // localStorage.setItem("data", JSON.stringify(object))
 }
 
+//fetches data to be displayed onto the page
 fetch(dummyMovieUrl)
     .then(function(response){
         console.log(response)
