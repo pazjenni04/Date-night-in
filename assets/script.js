@@ -116,34 +116,59 @@ closeTestBtn.addEventListener("click", function(){
 //     }    
 // }
 
-//fetches both api's for random recipe and random movie
+//fetches both api's for random recipe and random movie and saves to local storage
 
-fetch(dummyMovieUrl)
+function saveToLocal(){
+
+    fetch(dummyRecipeUrlNoKey + 
+    jeremyApiKey
+    // jenniferApiKey
+    // janayApiKey
+    // gianniApiKey)
+    )
     .then(function(response){
         console.log(response)
         return response.json();
     })
 
     .then(data => {
-        localStorage.setItem(data, JSON.stringify(data));
+        var recipeData = {
+
+            recipeImg: `${data.recipes[0].image}`,
+            recipeTitle: `${data.recipes[0].title}`,
+            recipeSummary: `${data.recipes[0].summary}`,
+            recipeTime: `${data.recipes[0].readyInMinutes}`,
+
+        }
+        localStorage.setItem("recipeData", JSON.stringify(recipeData));
         return data;
     })
-    .then (displayMovie);
-        
-fetch(dummyRecipeUrlNoKey + 
-    jeremyApiKey
-    // jenniferApiKey
-    // janayApiKey
-    // gianniApiKey
-    )
+    .then (displayRecipe);
+
+fetch(dummyMovieUrl)
     .then(function(response){
         return response.json();
     })
     .then(data => {
-        localStorage.setItem(data, JSON.stringify(data));
+        var MovieData = {
+
+            movieImg: `${data.Poster}`,
+            movieTitle: `${data.Title}`,
+        
+        }
+        localStorage.setItem("movieData", JSON.stringify(MovieData));
+        console.log(MovieData)
         return data;
     })
-    .then (displayRecipe);
+    .then (displayMovie);
+
+    var object = {
+        "recipeData": recipeData,
+        "movieData": movieData,
+    }
+
+    localStorage.setItem("data", JSON.stringify(object))
+}
 
 //displays random recipe
 function displayRecipe (data) {
@@ -157,6 +182,7 @@ function displayRecipe (data) {
     createElement(yourRecipeInfo, "p", "timeRequired")
     getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
 }
+
 
 //displays random movie
 function displayMovie(data){
@@ -193,7 +219,7 @@ function closeBtn() {
 }
 
 
-document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
+document.getElementById("randomBtn").addEventListener("click", saveToLocal) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
 
 
@@ -201,45 +227,11 @@ document.getElementById("closeBtn").addEventListener("click", closeBtn) //close 
 //on this html page, I want to display all the favorite dates saved to recall in the future
 //need to create a local storage to display onto the page
 
-console.log(yourMovieInfo);
 
-var savetolocal = JSON.parse(localStorage.getItem("favorites")) || [];  //when click button, needs to save to local storage
-
-
-//local storage works -- now need to only grab certain elements from local storage to display onto favorite-index.html
-function datelocalstorage(event) {
-    event.preventDefault();
-
-    // var savetofav = {
-    //     favRecipe: yourRecipeInfo,
-    //     favMovie: yourMovieInfo,
-    // }
-
-    // console.log(yourMovieInfo)
-    
-    // savetolocal.push(savetofav);
-
-    // localStorage.setItem("favorites", JSON.stringify(savetolocal))
-
-    displayMovie(JSON.parse(localStorage.getItem('movie')));
-    displayRecipe(JSON.parse(localStorage.getItem('recipe')));
-
-}
-
-document.getElementById("favBtn").addEventListener("click", datelocalstorage); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
+// document.getElementById("favBtn").addEventListener("click", showslides(n)); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
 
 
-//when click, i need this to open second html file and display local storage results
-// document.getElementById('favlink').addEventListener("click", function (event){
-//     event.preventDefault();
 
-//     var recipeResults = document.createElement('div')
-//     var favoriteResults = document.getElementById('favorite-results');
-//     recipeResults.innerHTML = displayRecipe(JSON.parse(localStorage.getItem('recipe')));
-
-//     favoriteResults.appendChild(recipeResults);
-
-// })
 //slideshow JAVASCRIPT//
 // <!-- <div class="mySlides fade">
 // <div class="numbertext">1 / 3</div>
@@ -259,17 +251,24 @@ document.getElementById("favBtn").addEventListener("click", datelocalstorage); /
 // <div class="text">Caption Three</div>
 // </div>
 
-// localStorage.setItem('slide1', JSON.stringify({
-//     numberText: 1,
-//     imgSrc: './assets/images/download.jpg',
-//     captionText: 'Caption One'
-// }))
-// localStorage.setItem('slide2', JSON.stringify({
-//     numberText: 2,
-//     imgSrc: './assets/images/images-1.jpg',
-//     captionText: 'Caption Two'
-// }))
+localStorage.setItem('slide1', JSON.stringify({
+    numberText: 1,
+    imgSrc: './assets/images/download.jpg',
+    captionText: 'Caption One'
+}))
+localStorage.setItem('slide2', JSON.stringify({
+    numberText: 2,
+    imgSrc: './assets/images/images-1.jpg',
+    captionText: 'Caption Two'
+}))
 
+var slideIx = localStorage.getItem(`${data.recipes[0].image}`);
+if (slideIx === null) {
+    slideIx = 1;
+}
+
+var slideIndex = slideIx;
+showSlides(slideIndex);
 
 var slideIndex = 1;
 showSlides(slideIndex);
