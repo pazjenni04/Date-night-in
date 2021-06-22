@@ -22,7 +22,7 @@
 <body>
 
 
-<a href="#open-modal">Open Modal </a>
+<a href="index.html">Open Modal </a>
 <div id="open-home" class="modal-window">
   <div>
     <a href="#modal-close" title="Close" class="modal-close">close &times;</a>
@@ -55,31 +55,37 @@
   </div>
 </div>
 
+
 <div class="header">
   <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
     <a class="pure-menu-heading" href="">Date Night In</a>
 
     <ul class="pure-menu-list">
       <li class="pure-menu-item">
-        <a href ="index.html" class="pure-menu-link">Home</a>
+
+        <a href="index.html" class="pure-menu-link">Home</a>
+        
       </li>
 
       <li class="pure-menu-item">
         <a href="#open-filters" class="pure-menu-link">Filters</a>
       </li>
+
+     
     </ul>
     
 </div>
 
+<!-- jumbotron that contains random button generator -->
 <div class="splash-container">
   <div class="splash">
     <h1 class="splash-head">Date night in</h1>
-      <div id="date-information" class="modal-window">
+      <div id="date-information" class="modal-window modal-lg">
         <div>
             <a href="#modal-close" title="Close" class="modal-close" id= "closeBtn">close &times;</a>
             <div id="yourMovieInfo"></div>
             <div id="yourRecipeInfo"></div>
-            <button id= "favBtn" onclick="saveToLocal()">Save to favorites!</button>
+            <button id= "favBtn">Save to favorites!</button>
             
         </div>
       </div>

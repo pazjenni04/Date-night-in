@@ -190,20 +190,18 @@ function fSaveDate(object){
 
 function fOpenHistoryModal(){
 
-//open localStorage
-let maxDateInLocalStorage = localStorage.getItem("maxDateInLocalStorage");
+    //open localStorage
+    let maxDateInLocalStorage = localStorage.getItem("maxDateInLocalStorage");
 
-var table = document.getElementById("historyTable");
+    var table = document.getElementById("historyTable");
+    var numRows = document.getElementById("historyTable").rows.length;
 
-var numRows = document.getElementById("historyTable").rows.length;
-
-console.log("numRows" + numRows);
-for(let i=0; i<numRows-1; i++){
-   table.deleteRow(i);
-   console.log("row "+ i);
+    console.log("numRows" + numRows);
+    for(let i=0; i<numRows-1; i++){
+       table.deleteRow(i);
+       console.log("row "+ i);
 
 }
-
     for(let i=1;i<=maxDateInLocalStorage; i++){
 
         let DateInStr = localStorage.getItem("DateIn_"+i);
