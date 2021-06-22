@@ -117,50 +117,6 @@ closeTestBtn.addEventListener("click", function(){
 //     }    
 // }
 
-//fetches both api's for random recipe and random movie and saves to local storage
-
-// function savetolocal() {
-// fetch(dummyRecipeUrlNoKey + 
-//     jeremyApiKey
-//     // jenniferApiKey
-//     // janayApiKey
-//     // gianniApiKey)
-//     )
-//     .then(function(response){
-//         return response.json();
-//     })
-
-//     .then(data => {
-//         var recipeData = {
-
-//             recipeImg: `${data.recipes[0].image}`,
-//             recipeTitle: `${data.recipes[0].title}`,
-//             recipeSummary: `${data.recipes[0].summary}`,
-
-//         }
-//         localStorage.setItem("recipeData", JSON.stringify(recipeData));
-//         return data;
-//     })
-//     .then(data => displayRecipe(data))
-
-// fetch(dummyMovieUrl)
-//     .then(function(response){
-//         return response.json();
-//     })
-//     .then(data => {
-//         var MovieData = {
-
-//             movieImg: `${data.Poster}`,
-//             movieTitle: `${data.Title}`,
-        
-//         }
-//         localStorage.setItem("movieData", JSON.stringify(MovieData));
-//         return data;
-//     })
-//     .then(data=> displayMovie(data));
-
-// }
-
 
 // fetches data to be displayed onto the page
 fetch(dummyMovieUrl)
@@ -220,8 +176,9 @@ function displayMovie(data){
     getId("runtime").textContent = "Runtime: " + data.Runtime
 }
 
-//when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
-document.getElementById("favBtn").addEventListener("click", function(event) {
+
+
+function saveBtnLocal() {    
     const recipeData = {
 
         recipeImg: document.getElementById('foodImage').innerHTML,
@@ -238,6 +195,13 @@ document.getElementById("favBtn").addEventListener("click", function(event) {
     
     localStorage.setItem('recipeData', JSON.stringify(recipeData))
     localStorage.setItem('movieData',JSON.stringify(movieData))
+ };
+
+ //when click on the 'save to favorites' btn, then should save to local storage and be available on the carousel
+document.getElementById("favBtn").addEventListener("click", function(event) {
+    event.preventDefault();
+    saveBtnLocal();
+    console.log("Recipe and Movie saved")
 });
 
 //displays modal with results of the api's
