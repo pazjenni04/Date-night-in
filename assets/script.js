@@ -12,6 +12,7 @@ function getId(id){
 }
 
 var yourMovieInfo = getId("yourMovieInfo")
+var yourMovieInfo2 = getId("yourMovieInfo2")
 var yourRecipeInfo = getId("yourRecipeInfo")
 
 function createElement(parent, element, childId){
@@ -135,22 +136,28 @@ function displayRecipe (data) {
     createElement(yourRecipeInfo, "img", "foodImage")
     getId("foodImage").setAttribute("src", data.recipes[0].image)
     getId("foodImage").className = "pure-img";
-    createElement(yourRecipeInfo, "h2", "recipeTitle")
+    createElement(yourRecipeInfo2, "h2", "recipeTitle")
     getId("recipeTitle").textContent = data.recipes[0].title
-    createElement(yourRecipeInfo, "p", "summary")
+    createElement(yourRecipeInfo2, "p", "summary")
     getId("summary").innerHTML = data.recipes[0].summary
-    createElement(yourRecipeInfo, "p", "timeRequired")
+    createElement(yourRecipeInfo2, "p", "timeRequired")
     getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
 }
 
 //displays random movie
 function displayMovie(data){
+
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
+    getId("moviePoster").setAttribute("align", "top")
     getId("moviePoster").className = "pure-img";
-    createElement(yourMovieInfo, "h2", "title")
+
+//    var moviePosterEl = document.getElementById("moviePoster");
+//    moviePosterEl.innerHTML = "<img src='"+dataPoster+"' class='pure-img vred' >";
+
+    createElement(yourMovieInfo2, "h2", "title")
     getId("title").textContent = data.Title
-    createElement(yourMovieInfo, "ul", "movieStats")
+    createElement(yourMovieInfo2, "ul", "movieStats")
     var movieStats = getId("movieStats")
     createElement(movieStats, "li", "actors")
     getId("actors").textContent = "Actors: " + data.Actors
@@ -198,7 +205,7 @@ document.getElementById("favBtn").addEventListener("click", function(event) {
 
 //displays modal with results of the api's
 function randomEl(event) {
-    document.getElementById("date-information").style.display = "block";
+    document.getElementById("s").style.display = "block";
 }
 
 //closes the modal window when displayed and redirects to landing page

@@ -1,4 +1,21 @@
+.button-primary {
+    background: navy;
+    /* this is a green */
+}
 
+.centerDIV{
+    justify-content: center;
+    text-align: center;
+}
+
+.vred{
+    border: 1px solid red;
+}
+
+.text-splash {
+    color:white;
+    text-decoration: none;
+}
 .pure-menu {
   direction: rtl;
   text-align: left;
@@ -28,8 +45,12 @@ opacity: 1;
 pointer-events: auto;
 }
 
+.centerDIV{
+    justify
+}
+
 .modal-window>div {
-width: 50% !important;
+width: 80% !important;
 position: relative;
 margin: 10% auto;
 padding: 2rem;

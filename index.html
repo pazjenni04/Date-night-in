@@ -83,19 +83,35 @@
       <div id="date-information" class="modal-window">
         <div>
             <a href="#modal-close" title="Close" class="modal-close" id= "closeBtn">close &times;</a>
-            <div id="yourMovieInfo"></div>
+<br>
+            <div class="pure-g centerDIV ">
+              <div class="pure-u-1 " id="">
+                <table width="100%" border="1">
+                  <tr>
+                    <td id="yourMovieInfo" align="center" width="50%" cellpadding="15"></td>
+                    <td id="yourMovieInfo2" align="center"></td>
+                  </tr>
+                  <tr style="background-color: #ddd">
+                    <td id="yourRecipeInfo" align="center" width="50%"></td>
+                    <td id="yourRecipeInfo2" align="center"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          <div>
             <div id="yourRecipeInfo"></div>
-            <button id= "favBtn">Save to favorites!</button>
+          </div><br/>
+            <button id="favBtn">Save to favorites!</button>
             
         </div>
       </div>
-    <p class="splash-subhead">
+    <p class="text-splash">
         Press the 'Random Button Generator' below to get a quick, easy date night in.  
         <br>
         The button will generate a random recipe and movie recommendation for your special night!
     </p>
     <p>
-      <a href="#date-information"><button id= "randomBtn" class="pure-button pure-button-primary" onclick="randomEl()">Random Button Generator</button></a>
+      <a href="#date-information"><button id="randomBtn" class="pure-button pure-button-primary button-primary" onclick="randomEl()">Random Button Generator</button></a>
     </p>
   </div>
 </div>
