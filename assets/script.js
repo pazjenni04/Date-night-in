@@ -20,6 +20,7 @@ function createElement(parent, element, childId){
     parent.appendChild(myElement)
 }
 
+
 var cuisine = [
     "African",
     "American",
@@ -117,50 +118,51 @@ closeTestBtn.addEventListener("click", function(){
 // }
 
 //fetches both api's for random recipe and random movie and saves to local storage
-function saveToLocal(){
 
-    fetch(dummyRecipeUrlNoKey + 
-    jeremyApiKey
-    // jenniferApiKey
-    // janayApiKey
-    // gianniApiKey)
-    )
-    .then(function(response){
-        console.log(response)
-        return response.json();
-    })
+// function savetolocal() {
+// fetch(dummyRecipeUrlNoKey + 
+//     jeremyApiKey
+//     // jenniferApiKey
+//     // janayApiKey
+//     // gianniApiKey)
+//     )
+//     .then(function(response){
+//         return response.json();
+//     })
 
-    .then(data => {
-        var recipeData = {
+//     .then(data => {
+//         var recipeData = {
 
-            recipeImg: `${data.recipes[0].image}`,
-            recipeTitle: `${data.recipes[0].title}`,
-            recipeSummary: `${data.recipes[0].summary}`,
+//             recipeImg: `${data.recipes[0].image}`,
+//             recipeTitle: `${data.recipes[0].title}`,
+//             recipeSummary: `${data.recipes[0].summary}`,
 
-        }
-        localStorage.setItem("recipeData", JSON.stringify(recipeData));
-        return data;
-    })
+//         }
+//         localStorage.setItem("recipeData", JSON.stringify(recipeData));
+//         return data;
+//     })
+//     .then(data => displayRecipe(data))
 
-fetch(dummyMovieUrl)
-    .then(function(response){
-        return response.json();
-    })
-    .then(data => {
-        var MovieData = {
+// fetch(dummyMovieUrl)
+//     .then(function(response){
+//         return response.json();
+//     })
+//     .then(data => {
+//         var MovieData = {
 
-            movieImg: `${data.Poster}`,
-            movieTitle: `${data.Title}`,
+//             movieImg: `${data.Poster}`,
+//             movieTitle: `${data.Title}`,
         
-        }
-        localStorage.setItem("movieData", JSON.stringify(MovieData));
-        console.log(MovieData)
-        return data;
-    })
+//         }
+//         localStorage.setItem("movieData", JSON.stringify(MovieData));
+//         return data;
+//     })
+//     .then(data=> displayMovie(data));
 
-}
+// }
 
-//fetches data to be displayed onto the page
+
+// fetches data to be displayed onto the page
 fetch(dummyMovieUrl)
     .then(function(response){
         console.log(response)
@@ -180,6 +182,7 @@ fetch(dummyRecipeUrlNoKey +
     })
     .then(data => displayRecipe(data));
 
+
 //displays random recipe
 function displayRecipe (data) {
     console.log(data);
@@ -192,7 +195,6 @@ function displayRecipe (data) {
     createElement(yourRecipeInfo, "p", "timeRequired")
     getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
 }
-
 
 //displays random movie
 function displayMovie(data){
@@ -218,6 +220,26 @@ function displayMovie(data){
     getId("runtime").textContent = "Runtime: " + data.Runtime
 }
 
+//when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
+document.getElementById("favBtn").addEventListener("click", function(event) {
+    const recipeData = {
+
+        recipeImg: document.getElementById('foodImage').innerHTML,
+        recipeTitle: document.getElementById('recipeTitle').innerHTML,
+        recipeSummary: document.getElementById('summary').innerHTML,
+        
+    };
+
+    const movieData= {
+        movieImg: document.getElementById("moviePoster").innerHTML,
+        movieTitle: document.getElementById("title").innerHTML,
+
+    }
+    
+    localStorage.setItem('recipeData', JSON.stringify(recipeData))
+    localStorage.setItem('movieData',JSON.stringify(movieData))
+});
+
 //displays modal with results of the api's
 function randomEl(event) {
     document.getElementById("date-information").style.display = "block";
@@ -233,7 +255,7 @@ document.getElementById("randomBtn").addEventListener("click", randomEl) //rando
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
 
 
-document.getElementById("favBtn").addEventListener("click", saveToLocal); //when click on the 'save to favorites' btn, then should save to local storage and be available on the favorite's html file
+
 
 
 
