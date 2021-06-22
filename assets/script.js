@@ -224,14 +224,14 @@ function displayMovie(data){
 document.getElementById("favBtn").addEventListener("click", function(event) {
     const recipeData = {
 
-        recipeImg: document.getElementById('foodImage').innerHTML,
+        recipeImg: document.getElementById('foodImage').src,
         recipeTitle: document.getElementById('recipeTitle').innerHTML,
         recipeSummary: document.getElementById('summary').innerHTML,
         
     };
 
     const movieData= {
-        movieImg: document.getElementById("moviePoster").innerHTML,
+        movieImg: document.getElementById("moviePoster").src,
         movieTitle: document.getElementById("title").innerHTML,
 
     }
