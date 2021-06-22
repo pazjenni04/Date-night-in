@@ -108,15 +108,13 @@ closeTestBtn.addEventListener("click", function(){
 
 
 
-// fetches data to be displayed onto the page
-fetch(dummyMovieUrl)
-    .then(function(response){
-        console.log(response)
-        return response.json();
-    })
 
-    .then(data => displayMovie(data))
-   
+
+function getRandomInt() {
+    return Math.floor(Math.random() * (9000000 - 1000000) + 1000000); //The maximum is exclusive and the minimum is inclusive
+    }
+
+// fetches data to be displayed onto the page
 fetch(dummyRecipeUrlNoKey + 
     // jeremyApiKey
     jenniferApiKey
@@ -128,26 +126,44 @@ fetch(dummyRecipeUrlNoKey +
     })
     .then(data => displayRecipe(data));
 
+// fetch(dummyMovieUrl)
+//     .then(function(response){
+//         console.log(response)
+//         return response.json();
+//     })
+//     .then(data => displayMovie(data))
 
-//displays random recipe
-function displayRecipe (data) {
-    console.log(data);
-    createElement(yourRecipeInfo, "img", "foodImage")
-    getId("foodImage").setAttribute("src", data.recipes[0].image)
-    getId("foodImage").className = "pure-img";
-    createElement(yourRecipeInfo, "h2", "recipeTitle")
-    getId("recipeTitle").textContent = data.recipes[0].title
-    createElement(yourRecipeInfo, "p", "summary")
-    getId("summary").innerHTML = data.recipes[0].summary
-    createElement(yourRecipeInfo, "p", "timeRequired")
-    getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
-}
+    function getRandomInt() {
+        return Math.floor(Math.random() * (9000000 - 1000000) + 1000000); //The maximum is exclusive and the minimum is inclusive
+      }
+      function fetchMovie(id) {
+        const randomNumber = getRandomInt();
+        fetch(`https://www.omdbapi.com/?apikey=48a5261b&i=tt${id}`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((response) => {
+            if (response.Type === 'movie' && response.Genre !== 'adult' && response.Poster !== "N/A") {
+                console.log(response)
+                displayMovie(response)
+              return; // STOP
+            }
+            console.log('I tried')
+            fetchMovie(getRandomInt())
+          })
+      }
+      fetchMovie(getRandomInt());
+
+
 
 //displays random movie
 function displayMovie(data){
+    yourMovieInfo.innerHTML = ""; //clears the innerHTML
+
+    if(data.Poster !== 'N/A'){
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
-    getId("moviePoster").className = "pure-img";
+    }
     createElement(yourMovieInfo, "h2", "title")
     getId("title").textContent = data.Title
     createElement(yourMovieInfo, "ul", "movieStats")
@@ -167,6 +183,22 @@ function displayMovie(data){
     createElement(movieStats, "li", "runtime")
     getId("runtime").textContent = "Runtime: " + data.Runtime
 }
+
+//displays random recipe
+function displayRecipe (data) {
+    yourRecipeInfo.innerHTML = ""; //clears the innerHTML
+
+    createElement(yourRecipeInfo, "img", "foodImage")
+    getId("foodImage").setAttribute("src", data.recipes[0].image)
+    createElement(yourRecipeInfo, "h2", "recipeTitle")
+    getId("recipeTitle").textContent = data.recipes[0].title
+    createElement(yourRecipeInfo, "p", "summary")
+    getId("summary").innerHTML = data.recipes[0].summary
+    createElement(yourRecipeInfo, "p", "timeRequired")
+    getId("timeRequired").textContent = "Ready in " + data.recipes[0].readyInMinutes + " minutes"
+}
+
+
 
 
 
@@ -194,6 +226,7 @@ document.getElementById("favBtn").addEventListener("click", function(event) {
     event.preventDefault();
     saveBtnLocal();
     console.log("Recipe and Movie saved")
+    
 });
 
 //displays modal with results of the api's
@@ -210,25 +243,21 @@ function closeBtn() {
 document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
 
+//pushing images to an array so that can grab in the local storage
+
+function setCarousel() {
+
 var imageArr = [];
-
-// localStorage.setItem("images", JSON.stringify(imageArr))
-
-var recipefromlocal= JSON.parse(localStorage.getItem("recipeData"))
+var recipefromlocal= JSON.parse(localStorage.getItem("recipeData"))  //grabs images from local storage to display at bottom of the page
 var moviefromlocal= JSON.parse(localStorage.getItem("movieData"))
 
 imageArr.push(recipefromlocal.recipeImg)
-imageArr.push(moviefromlocal.movieImg)
-
-
-// var slidesEl = document.querySelectorAll(".numbertext")
-
-
-// for(i=0; i<imgArr.length; i++){
-//     imgArr[i].setAttribute("src", imageArr[i])
-// }
+if(moviefromlocal.Poster !== "N/A"){
+    imageArr.push(moviefromlocal.movieImg)
+}
 
 var containerEl = document.querySelector(".slideshow-container");
+containerEl.innerHTML = "";
 for(i=0; i<imageArr.length; i++) {
         var newImg = document.createElement("img")
         newImg.setAttribute("src", imageArr[i])
@@ -237,55 +266,7 @@ for(i=0; i<imageArr.length; i++) {
         containerEl.appendChild(newImg)
     }
 
+}
 
-
-
-
-
-
-
-// localStorage.setItem('slide1', JSON.stringify({
-//     numberText: 1,
-//     imgSrc: './assets/images/download.jpg',
-//     captionText: 'Caption One'
-// }))
-// localStorage.setItem('slide2', JSON.stringify({
-//     numberText: 2,
-//     imgSrc: './assets/images/images-1.jpg',
-//     captionText: 'Caption Two'
-// }))
-
-
-// var slideIndex = slideIx;
-// showSlides(slideIndex);
-
-// var slideIndex = 1;
-// showSlides(slideIndex);
-
-// Next/previous controls
-// function plusSlides(n) {
-//   showSlides(slideIndex += n);
-// }
-
-// // Thumbnail image controls
-// function currentSlide(n) {
-//   showSlides(slideIndex = n);
-// }
-
-// function showSlides(n) {
-//   var i;
-//   var slides = document.getElementsByClassName("mySlides");
-//   var dots = document.getElementsByClassName("dot");
-//   if (n > slides.length) {slideIndex = 1}
-//   if (n < 1) {slideIndex = slides.length}
-//   for (i = 0; i < slides.length; i++) {
-//       slides[i].style.display = "none";
-//   }
-//   for (i = 0; i < dots.length; i++) {
-//       dots[i].className = dots[i].className.replace(" active", "");
-//   }
-  
-//   slides[slideIndex-1].style.display = "block";
-//   dots[slideIndex-1].className += " active";
-// }
+setCarousel();
 
