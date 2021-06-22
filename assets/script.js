@@ -233,7 +233,7 @@ for(i=0; i<imageArr.length; i++) {
         var newImg = document.createElement("img")
         newImg.setAttribute("src", imageArr[i])
 
-        // newImg.setAttribute("class", "imageSize")
+        newImg.setAttribute("class", "imageSize")
         containerEl.appendChild(newImg)
     }
 
