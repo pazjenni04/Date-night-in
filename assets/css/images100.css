@@ -1,0 +1,117 @@
+history-table-image{
+    width: 25%;
+}
+
+
+.SpinnerClass{
+border: 1px solid red;
+}
+
+.moviePoster{
+     float: left;
+        height: auto;
+        vertical-align: top;
+        width: 100%;
+        padding: 10%;
+}
+
+.moxviePoster-sm{
+     float: left;
+        height: auto;
+        vertical-align: top;
+        width: 20%;
+        margin: 0.5%;
+}
+
+.moxviePoster-md{
+     float: left;
+        height: auto;
+        vertical-align: top;
+        width: 75%;
+        margin: 0.5%;
+}
+
+.moviePoster-front{
+
+         width: 90%;
+         margin: 0.5%;
+         padding: 5px;
+ }
+
+ .moviePlot-front{
+
+          width: 100%;
+          margin: 0.5%;
+          padding: 5px;
+          text-align: left;
+ }
+
+  .movieRated-front{
+
+           width: 100%;
+           margin: 0.5%;
+           padding: 5px;
+           text-align: left;
+           height: 125%;
+  }
+
+  .Bold{
+
+           font-weight: bolder;
+  }
+
+.movieTitle-front{
+
+          text-align: center;
+}
+
+.movieYear-front{
+
+          text-align: center;
+          font-weight: bolder;
+          color: black;
+}
+
+.movieTomatometer-front{
+
+          width: 25%;
+          height: auto;
+}
+
+.calendar-front{
+          text-align: center;
+}
+
+.center-content{
+          text-align: center;
+}
+
+.imageContainer {
+  position: relative;
+  text-align: center;
+}
+.tomatoRating {
+  color: black;
+  font-size: 150%;
+  font-weight: bolder;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+h1
+{
+  font-size: 24px;
+  text-shadow: -1px -1px #eee, 1px 1px #888, -3px 0 4px #000;
+  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  color:#ccc;
+  padding:16px;
+  font-weight:lighter;
+  -moz-box-shadow: 2px 2px 6px #888;
+  -webkit-box-shadow: 2px 2px 6px #888;
+  box-shadow:2px 2px 6px #888;
+  text-align:center;
+  display:inline;
+  line-height:92px;
+  background-image:url('https://images.all-free-download.com/images/graphiclarge/metal_texture_set_01_hd_picture_170839.jpg');
+}
