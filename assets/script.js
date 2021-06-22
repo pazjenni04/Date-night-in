@@ -134,6 +134,7 @@ function displayRecipe (data) {
     console.log(data);
     createElement(yourRecipeInfo, "img", "foodImage")
     getId("foodImage").setAttribute("src", data.recipes[0].image)
+    getId("foodImage").className = "pure-img";
     createElement(yourRecipeInfo, "h2", "recipeTitle")
     getId("recipeTitle").textContent = data.recipes[0].title
     createElement(yourRecipeInfo, "p", "summary")
@@ -146,6 +147,7 @@ function displayRecipe (data) {
 function displayMovie(data){
     createElement(yourMovieInfo, "img", "moviePoster")
     getId("moviePoster").setAttribute("src", data.Poster)
+    getId("moviePoster").className = "pure-img";
     createElement(yourMovieInfo, "h2", "title")
     getId("title").textContent = data.Title
     createElement(yourMovieInfo, "ul", "movieStats")

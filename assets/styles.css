@@ -35,6 +35,7 @@ margin: 10% auto;
 padding: 2rem;
 background: #fff;
 color: #444;
+vertical-align: middle;
 }
 
 .modal-window header {
