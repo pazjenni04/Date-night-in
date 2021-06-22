@@ -106,16 +106,6 @@ closeTestBtn.addEventListener("click", function(){
     test.parentNode.removeChild(test)
 })
 
-// {
-//     '6/19/2021 1:26:25 PM': {
-//         recipe,
-//         movie
-//     },
-//     '6/19/2021 1:29:25 PM': {
-//         recipe,
-//         movie
-//     }    
-// }
 
 
 // fetches data to be displayed onto the page
@@ -128,8 +118,8 @@ fetch(dummyMovieUrl)
     .then(data => displayMovie(data))
    
 fetch(dummyRecipeUrlNoKey + 
-    jeremyApiKey
-    // jenniferApiKey
+    // jeremyApiKey
+    jenniferApiKey
     // janayApiKey
     // gianniApiKey
     )
@@ -181,14 +171,14 @@ function displayMovie(data){
 function saveBtnLocal() {    
     const recipeData = {
 
-        recipeImg: document.getElementById('foodImage').innerHTML,
+        recipeImg: document.getElementById('foodImage').src,
         recipeTitle: document.getElementById('recipeTitle').innerHTML,
         recipeSummary: document.getElementById('summary').innerHTML,
         
     };
 
     const movieData= {
-        movieImg: document.getElementById("moviePoster").innerHTML,
+        movieImg: document.getElementById("moviePoster").src,
         movieTitle: document.getElementById("title").innerHTML,
 
     }
@@ -218,29 +208,39 @@ function closeBtn() {
 document.getElementById("randomBtn").addEventListener("click", randomEl) //random btn that user clicks to generate random movie and recipe
 document.getElementById("closeBtn").addEventListener("click", closeBtn) //close btn on the generated movie/recipe window in order to close and go back to homepage
 
+var imageArr = [];
+
+// localStorage.setItem("images", JSON.stringify(imageArr))
+
+var recipefromlocal= JSON.parse(localStorage.getItem("recipeData"))
+var moviefromlocal= JSON.parse(localStorage.getItem("movieData"))
+
+imageArr.push(recipefromlocal.recipeImg)
+imageArr.push(moviefromlocal.movieImg)
+
+
+// var slidesEl = document.querySelectorAll(".numbertext")
+
+
+// for(i=0; i<imgArr.length; i++){
+//     imgArr[i].setAttribute("src", imageArr[i])
+// }
+
+var containerEl = document.querySelector(".slideshow-container");
+for(i=0; i<imageArr.length; i++) {
+        var newImg = document.createElement("img")
+        newImg.setAttribute("src", imageArr[i])
+
+        // newImg.setAttribute("class", "imageSize")
+        containerEl.appendChild(newImg)
+    }
 
 
 
 
 
-//slideshow JAVASCRIPT//
-// <!-- <div class="mySlides fade">
-// <div class="numbertext">1 / 3</div>
-// <img src="./assets/images/download.jpg" style="width:100%">
-// <div class="text">Caption Text</div>
-// </div>
 
-// <div class="mySlides fade">
-// <div class="numbertext">2 / 3</div>
-// <img src="./assets/images/images-1.jpg" style="width:100%">
-// <div class="text">Caption Two</div>
-// </div>
 
-// <div class="mySlides fade">
-// <div class="numbertext">3 / 3</div>
-// <img src="./assets/images/images-3.jpg" style="width:100%">
-// <div class="text">Caption Three</div>
-// </div>
 
 // localStorage.setItem('slide1', JSON.stringify({
 //     numberText: 1,
@@ -260,7 +260,7 @@ document.getElementById("closeBtn").addEventListener("click", closeBtn) //close 
 // var slideIndex = 1;
 // showSlides(slideIndex);
 
-// // Next/previous controls
+// Next/previous controls
 // function plusSlides(n) {
 //   showSlides(slideIndex += n);
 // }
