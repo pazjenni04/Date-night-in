@@ -20,7 +20,7 @@ pointer-events: none;
 -webkit-transition: all 0.3s;
 -moz-transition: all 0.3s;
 transition: all 0.3s;
-overflow: auto;
+overflow: scroll;
 }
 
 .modal-window:target {
@@ -29,7 +29,7 @@ pointer-events: auto;
 }
 
 .modal-window>div {
-width: 500px;
+width: 50% !important;
 position: relative;
 margin: 10% auto;
 padding: 2rem;
@@ -49,7 +49,6 @@ position: absolute;
 right: 0;
 text-align: center;
 top: 0;
-width: 70px;
 text-decoration: none;
 }
 
@@ -60,6 +59,7 @@ color: #000;
 .modal-window h1 {
 font-size: 150%;
 margin: 0 0 15px;
+width: fit-content;
 }
 
 .fav-container {
@@ -72,18 +72,6 @@ position: relative;
 
 #date-information {
 overflow: scroll;
-display: none;
-}
-
-#fav-header {
-font-size: 100px;
-display: block;
-margin: 20px;
-padding: 20px;
-text-align: center;
-border: 20px;
-
-
 }
 
 /* slideshowCSS STYLE SHEET/*
