@@ -1,6 +1,8 @@
 # Date-night-in
 The objective of this project is to create a date night in where the webpage will generate a random movie and recipe to create a hassle-free date-night-in experience. 
 
+List of technologies used for code: Javascript, CSS, Pure CSS, Spoonacular API, and OMDb API
+
 When the user first arrives at on the homepage, they will be presented with the following window.
 
 ![The following image displays the viewport for the user when first directed onto the page](https://raw.githubusercontent.com/pazjenni04/Date-night-in/main/assets/images/home-page.PNG)
